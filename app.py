@@ -12,11 +12,10 @@ app = Potassium("my_app")
 @app.init
 def init():
     device = "cuda:0" if torch.cuda.is_available() else "cpu"
-    model = pipeline(
-        model="openai/whisper-base",
-        chunk_length_s=30,
-        device=device,
-    )
+    # Use a pipeline as a high-level helper
+    # from transformers import pipeline
+
+    model = pipeline("automatic-speech-recognition", model="Samveg17/whisper-base-hi", device=device)
 
     # set up boto3 client with credentials from environment variables
     s3 = boto3.client(
